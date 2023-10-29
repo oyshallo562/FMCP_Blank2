@@ -44,27 +44,29 @@ class MainActivity : AppCompatActivity() {
         val weatherList = ArrayList<WeatherRes>()
         service.getWeather(-1).enqueue(object : Callback<WeatherRes> {
             override fun onResponse(call: Call<WeatherRes>, response: Response<WeatherRes>) {
-
                 if (response.isSuccessful) {
                     val result: WeatherRes? = response.body()
-                    yesterdayData = WeatherRes(
-                        result!!.humidity,
-                        result.PM10,
-                        result.PM2_5,
-                        result.rain,
-                        result.temp,
-                        result.newsTitle,
-                        result.newsContent,
-                        result.dt,
-                        -1
-                    )
-                    weatherList.add(yesterdayData)
-                    binding.vpSample.adapter = ViewPagerAdapter(weatherList)
-                    Log.d("GetWeatherData", result.toString())
+                    if (result?.humidity != null) {  // null 체크 추가
+                        yesterdayData = WeatherRes(
+                            result.humidity,
+                            result.PM10,
+                            result.PM2_5,
+                            result.rain,
+                            result.temp,
+                            result.newsTitle,
+                            result.newsContent,
+                            result.dt,
+                            -1
+                        )
+                        // ... 나머지 코드
+                    } else {
+                        Log.d("GetWeatherData", "Null data received")
+                    }
                 } else {
                     Log.d("GetWeatherData", "onResponse 실패")
                 }
             }
+
 
             override fun onFailure(call: Call<WeatherRes>, t: Throwable) {
                 Log.d("GetWeatherData", "onFailure 에러 : " + t.message.toString())
@@ -131,6 +133,6 @@ class MainActivity : AppCompatActivity() {
 
 
     companion object {
-        const val BaseUrl = "http://18.176.54.100"
+        const val BaseUrl = "http://218.144.111.204"
     }
 }

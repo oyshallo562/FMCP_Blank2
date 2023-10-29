@@ -53,7 +53,7 @@ class ViewPagerAdapter(private val list: ArrayList<WeatherRes>) : PagerAdapter()
             weatherWord.setImageResource(R.drawable.weather_word_good)
         }
 
-        humidity.text = list[position].humidity + "%"
+        humidity.text = list[position].humidity.toString() + "%"
         PM10.text = list[position].PM10 + "㎍/m³"
         PM2_5.text = list[position].PM2_5 + "㎍/m³"
         rain.text = list[position].rain + "%"
