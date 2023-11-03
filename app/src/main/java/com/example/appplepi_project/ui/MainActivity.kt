@@ -133,6 +133,6 @@ class MainActivity : AppCompatActivity() {
 
 
     companion object {
-        const val BaseUrl = "http://218.144.111.204"
+        const val BaseUrl = "http://218.144.111.204:8000"
     }
 }
